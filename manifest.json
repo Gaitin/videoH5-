@@ -474,7 +474,8 @@
 					"plus/events.html",
 					"plus/nativeobj.html",
 					"index.html",
-					"webview_embed.html"
+					"webview_embed.html",
+					"webview_float.html"
 				],
 				"priority": 0
 			},

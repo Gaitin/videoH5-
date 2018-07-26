@@ -1,15 +1,16 @@
 {
-  "index.html": {
-    "refer": [
-      "plus/webview.html",
-      "index.html",
-      "webview_embed.html"
-    ]
-  },
-  "plus/webview.html": {
-    "refer": [
-      "plus/webview_embed.html",
-      "plus/webview_float.html"
-    ]
-  }
+	"index.html": {
+		"refer": [
+			"plus/webview.html",
+			"index.html",
+			"webview_embed.html",
+			"webview_float.html"
+		]
+	},
+	"plus/webview.html": {
+		"refer": [
+			"plus/webview_embed.html",
+			"plus/webview_float.html"
+		]
+	}
 }
