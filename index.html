@@ -92,13 +92,13 @@
   <a class="mui-tab-item" href="#">
   </a>
 </nav>
-
 </body>
 <script src="./js/mui.min.js"></script>
 <script type="text/javascript" src="./js/immersed.js"></script>
 <script type="text/javascript" src="./js/common.js"></script>
 
-<script type="text/javascript" >
+<script type="text/javascript">
+  let transfromUrl = ''
   mui.init();
   (function ($) {
     //阻尼系数
@@ -138,52 +138,62 @@
       });
     });
 
-    function getUrlOne() {
-     console.log(embed.getURL())
-      mui.ajax('http://www.85105052.com/index.php', {
-        url: embed.getURL(),
-        dataType: 'json',//服务器返回json格式数据
-        type: 'get',//HTTP请求类型
-        timeout: 10000,//超时时间设置为10秒；
-        success: function (data) {
-          //服务器返回响应，根据响应结果，分析是否登录成功；
-          alert(JSON.stringify(data))
-          console.log(data)
-        },
-        error: function (xhr, type, errorThrown) {
-          //异常处理；
-          console.log(type);
-        }
-      });
-    }
+
   })(mui);
 
-
-  // 创建悬浮窗口
-  var floatw=null;
-  function floatWebview(){
-    if(floatw){ // 避免快速多次点击创建多个窗口
-      return;
+  function getUrlOne() {
+    console.log(embed.getURL())
+    let targetUrl = embed.getURL()
+    let params = {
+      referer: "http://jiexi.071811.cc/jx.php?url=" + targetUrl,
+      time: new Date().getTime(),
+      key: "v6EHPnC4gddx8BL5KlxXagiowNU=",
+      url: targetUrl,
+      type: "youku",
+      from: '',
+      pc: 0,
     }
-    floatw=plus.webview.create("webview_float.html","webview_float.html",
-      {
-        width:'100%',
-        height:'250px',
-        margin:"auto",
-        background:"rgba(0,0,0,0.8)",
-        scrollIndicator:'none',
-        scalable:false,popGesture:'none'
-      });
-    floatw.addEventListener("loaded",function(){
-      floatw.show('fade-in',300);
-      floatw=null;
-    },false);
+    mui.ajax('http://jiexi.071811.cc/api/ty.php', {
+      // url: embed.getURL(),
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      data: params,
+      dataType: 'json',//服务器返回json格式数据
+      type: 'post',//HTTP请求类型
+      timeout: 10000,//超时时间设置为10秒；
+      success: function (data) {
+        //服务器返回响应，根据响应结果，分析是否登录成功；
+        if (data.url) {
+          transfromUrl = data.url
+        }
+      },
+      error: function (xhr, type, errorThrown) {
+        //异常处理；
+        console.log(type);
+      }
+    });
   }
 
+  // 创建悬浮窗口
+  var floatw = null;
 
-
-
-
+  function floatWebview() {
+    if (floatw) { // 避免快速多次点击创建多个窗口
+      return;
+    }
+    floatw = plus.webview.create("webview_float.html", "webview_float.html",
+      {
+        width: '100%',
+        height: '250px',
+        margin: "auto",
+        background: "rgba(0,0,0,0.8)",
+        scrollIndicator: 'none',
+        scalable: false, popGesture: 'none'
+      });
+    floatw.addEventListener("loaded", function () {
+      floatw.show('fade-in', 300);
+      floatw = null;
+    }, false);
+  }
 
 
   var ws = null, embed = null;
